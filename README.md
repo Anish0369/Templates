@@ -1,2 +1,2 @@
 # Templates
-Repo to store all my templates of solving problems
+Repo to store all my templates for solving problems
