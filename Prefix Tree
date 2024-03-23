@@ -1,0 +1,97 @@
+class Node{
+   
+   Node* branches[26];
+   bool flag = false;
+
+   public :
+
+   bool isKey(char ch){
+
+     if(branches[ch-'a'] != nullptr){
+        return true;
+     }else{
+        return false;
+     }
+   }
+
+
+   void set(char ch , Node* temp){
+
+      branches[ch-'a'] = temp;
+   }
+
+
+   Node* get(char ch){
+      return branches[ch-'a'];
+   }
+
+
+   void setEnd(){
+     flag = true;
+   }
+
+   bool isEnd(){
+       return flag;
+   }
+
+};
+
+
+
+class Trie {
+
+    Node* root ;
+public:
+    Trie() {
+        root= new Node();
+    }
+    
+    void insert(string word) {
+         Node* temp = root;
+
+         for(int i = 0 ; i < word.size() ; i++){
+            if(!temp->isKey(word[i])){
+                temp->set(word[i] , new Node());
+            }
+
+            temp =  temp->get(word[i]);
+         }
+
+
+         temp->setEnd();
+    }
+    
+    bool search(string word) {
+          Node* temp = root;
+          for(int i = 0 ; i < word.size() ; i++){
+            if(!temp->isKey(word[i])){
+                // temp->set(word[i] , new Node());
+                return false;
+            }
+
+            temp =  temp->get(word[i]);
+         }
+
+
+        return  temp->isEnd();
+
+
+    }
+    
+    bool startsWith(string word) {
+                  Node* temp = root;
+
+        for(int i = 0 ; i < word.size() ; i++){
+            if(!temp->isKey(word[i])){
+                // temp->set(word[i] , new Node());
+                return false;
+            }
+
+            temp =  temp->get(word[i]);
+         }
+
+
+        return  true;
+
+    }
+};
